@@ -22,7 +22,7 @@
  *
  *  src/freon.cpp
  *
- *  Public header of the PersistentObject module.
+ *  Public header of the Freezable module.
  */
 
 #pragma once
@@ -33,7 +33,7 @@
 #include <Persistence.h>
 
 namespace freon {
-	class PersistentObject {
+	class Freezable {
 	public:
 		void store(std::string object, std::string id);
 		void store(std::string prefix, std::string object, std::string id);

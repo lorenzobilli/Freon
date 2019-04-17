@@ -2,9 +2,9 @@
 
 #include <string>
 
-#include <PersistentObject.h>
+#include <Freezable.h>
 
-class Person : public freon::PersistentObject {
+class Person : public freon::Freezable {
 public:
 	Person();
 	Person(std::string name, std::string surname);

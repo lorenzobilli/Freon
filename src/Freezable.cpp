@@ -20,14 +20,14 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  src/PersistentObject.cpp
+ *  src/Freezable.cpp
  *
- *  Implementation of all methods of the PersistentObject module.
+ *  Implementation of all methods of the Freezable module.
  */
 
-#include "PersistentObject.h"
+#include "Freezable.h"
 
-void freon::PersistentObject::store(std::string object, std::string id)
+void freon::Freezable::store(std::string object, std::string id)
 {
 	this->object = object;
 	this->id = id;
@@ -47,13 +47,13 @@ void freon::PersistentObject::store(std::string object, std::string id)
 	writer.close();
 }
 
-void freon::PersistentObject::store(std::string prefix, std::string object, std::string id)
+void freon::Freezable::store(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
 	store(object, id);
 }
 
-void freon::PersistentObject::load(std::string object, std::string id)
+void freon::Freezable::load(std::string object, std::string id)
 {
 	this->object = object;
 	this->id = id;
@@ -78,13 +78,13 @@ void freon::PersistentObject::load(std::string object, std::string id)
 	load_all();
 }
 
-void freon::PersistentObject::load(std::string prefix, std::string object, std::string id)
+void freon::Freezable::load(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
 	load(object, id);
 }
 
-std::string freon::PersistentObject::get_nested_prefix()
+std::string freon::Freezable::get_nested_prefix()
 {
 	std::string nested_prefix;
 
