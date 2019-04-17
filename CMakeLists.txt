@@ -28,3 +28,4 @@ include_directories(${CMAKE_SOURCE_DIR}/external/include)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/src)
+add_subdirectory(${CMAKE_SOURCE_DIR}/tests)
