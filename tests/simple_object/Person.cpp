@@ -22,8 +22,8 @@ std::string Person::get_surname()
 
 void Person::store_all()
 {
-	get_storer().add("name", freon::Serialize::Field::Type::String, name);
-	get_storer().add("surname", freon::Serialize::Field::Type::String, surname);
+	get_storer().add("name", freon::Freezer::Field::Type::String, name);
+	get_storer().add("surname", freon::Freezer::Field::Type::String, surname);
 }
 
 void Person::load_all()

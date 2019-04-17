@@ -27,37 +27,37 @@
 
 #include <Persistence.h>
 
-freon::Serialize::Serialize() = default;
+freon::Freezer::Freezer() = default;
 
-freon::Serialize::Serialize(const Serialize &serialize)
+freon::Freezer::Freezer(const Freezer &serialize)
 {
 }
 
-void freon::Serialize::add(std::string identifier, Field::Type type, bool value)
-{
-	Field field = Field(type, value);
-	buffer_area.insert({identifier, field});
-}
-
-void freon::Serialize::add(std::string identifier, Field::Type type, int value)
+void freon::Freezer::add(std::string identifier, Field::Type type, bool value)
 {
 	Field field = Field(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Serialize::add(std::string identifier, Field::Type type, std::string value)
+void freon::Freezer::add(std::string identifier, Field::Type type, int value)
 {
 	Field field = Field(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Serialize::add(std::string identifier, Field::Type type, std::vector<std::string> values)
+void freon::Freezer::add(std::string identifier, Field::Type type, std::string value)
+{
+	Field field = Field(type, value);
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(std::string identifier, Field::Type type, std::vector<std::string> values)
 {
 	Field field = Field(type, values);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Serialize::store()
+void freon::Freezer::store()
 {
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(this->buffer);
 
@@ -89,75 +89,75 @@ void freon::Serialize::store()
 	writer.EndObject();
 }
 
-std::string freon::Serialize::get_json()
+std::string freon::Freezer::get_json()
 {
 	return buffer.GetString();
 }
 
-freon::Serialize::Field::Field(Type type, bool value)
+freon::Freezer::Field::Field(Type type, bool value)
 {
 	this->type = type;
 	this->value.b = value;
 }
 
-freon::Serialize::Field::Field(Type type, int value)
+freon::Freezer::Field::Field(Type type, int value)
 {
 	this->type = type;
 	this->value.i = value;
 }
 
-freon::Serialize::Field::Field(Type type, std::string value)
+freon::Freezer::Field::Field(Type type, std::string value)
 {
 	this->type = type;
 	this->value.s = value;
 }
 
-freon::Serialize::Field::Field(Type type, std::vector<std::string> values)
+freon::Freezer::Field::Field(Type type, std::vector<std::string> values)
 {
 	this->type = type;
 	this->value.vs = values;
 }
 
-freon::Serialize::Field::Type freon::Serialize::Field::get_type()
+freon::Freezer::Field::Type freon::Freezer::Field::get_type()
 {
 	return type;
 }
 
-freon::Serialize::Field::Value freon::Serialize::Field::get_value()
+freon::Freezer::Field::Value freon::Freezer::Field::get_value()
 {
 	return value;
 }
 
-freon::Deserialize::Deserialize() = default;
+freon::Defroster::Defroster() = default;
 
-freon::Deserialize::Deserialize(const freon::Deserialize &deserialize)
+freon::Defroster::Defroster(const freon::Defroster &deserialize)
 {
 }
 
-void freon::Deserialize::initialize(std::string json)
+void freon::Defroster::initialize(std::string json)
 {
 	this->document.Parse(json.c_str());
 }
 
-bool freon::Deserialize::load_bool(std::string identifier)
+bool freon::Defroster::load_bool(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	return value.GetBool();
 }
 
-int freon::Deserialize::load_int(std::string identifier)
+int freon::Defroster::load_int(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	return value.GetInt();
 }
 
-std::string freon::Deserialize::load_string(std::string identifier)
+std::string freon::Defroster::load_string(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	return value.GetString();
 }
 
-std::vector<std::string> freon::Deserialize::load_arraystring(std::string identifier)
+std::vector<std::string> freon::Defroster::load_arraystring(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	std::vector<std::string> vector;

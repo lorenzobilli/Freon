@@ -37,7 +37,7 @@
 #include <rapidjson/document.h>
 
 namespace freon {
-	class Serialize {
+	class Freezer {
 	public:
 		class Field {
 		public:
@@ -63,8 +63,8 @@ namespace freon {
 			Type type;
 			Value value;
 		};
-		Serialize();
-		Serialize(const Serialize &serialize);
+		Freezer();
+		Freezer(const Freezer &serialize);
 		void add(std::string identifier, Field::Type type, bool value);
 		void add(std::string identifier, Field::Type type, int value);
 		void add(std::string identifier, Field::Type type, std::string value);
@@ -75,10 +75,10 @@ namespace freon {
 		rapidjson::StringBuffer buffer;
 		std::unordered_map<std::string, Field> buffer_area;
 	};
-	class Deserialize {
+	class Defroster {
 	public:
-		Deserialize();
-		Deserialize(const Deserialize &deserialize);
+		Defroster();
+		Defroster(const Defroster &deserialize);
 		void initialize(std::string json);
 		bool load_bool(std::string identifier);
 		int load_int(std::string identifier);

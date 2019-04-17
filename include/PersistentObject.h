@@ -39,13 +39,13 @@ namespace freon {
 		void store(std::string prefix, std::string object, std::string id);
 		void load(std::string object, std::string id);
 		void load(std::string prefix, std::string object, std::string id);
-		freon::Serialize &get_storer() { return storer; }
-		freon::Deserialize &get_loader() { return loader; }
+		freon::Freezer &get_storer() { return storer; }
+		freon::Defroster &get_loader() { return loader; }
 		std::string get_filename() { return filename; }
 		std::string get_nested_prefix();
 	private:
-		freon::Serialize storer;
-		freon::Deserialize loader;
+		freon::Freezer storer;
+		freon::Defroster loader;
 		std::string prefix;
 		std::string object;
 		std::string id;
