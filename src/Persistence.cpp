@@ -57,6 +57,12 @@ void freon::Freezer::add(std::string identifier, Field::Type type, std::vector<s
 	buffer_area.insert({identifier, field});
 }
 
+void freon::Freezer::add(std::string identifier, Field::Type type, std::vector<std::vector<std::string>> values)
+{
+	Field field = Field(type, values);
+	buffer_area.insert({identifier, field});
+}
+
 void freon::Freezer::store()
 {
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(this->buffer);
@@ -81,6 +87,18 @@ void freon::Freezer::store()
 				writer.StartArray();
 				for (auto value : field.second.get_value().vs) {
 					writer.String(value.c_str());
+				}
+				writer.EndArray();
+				break;
+			case Field::Type::MatrixString:
+				writer.String(field.first.c_str());
+				writer.StartArray();
+				for (auto i = 0; i < field.second.get_value().ms.size(); i++) {
+					writer.StartArray();
+					for (auto j = 0; j < field.second.get_value().ms.size(); j++) {
+						writer.String(field.second.get_value().ms.at(i).at(j).c_str());
+					}
+					writer.EndArray();
 				}
 				writer.EndArray();
 				break;
@@ -116,6 +134,12 @@ freon::Freezer::Field::Field(Type type, std::vector<std::string> values)
 {
 	this->type = type;
 	this->value.vs = values;
+}
+
+freon::Freezer::Field::Field(Type type, std::vector<std::vector<std::string>> values)
+{
+	this->type = type;
+	this->value.ms = values;
 }
 
 freon::Freezer::Field::Type freon::Freezer::Field::get_type()
@@ -165,4 +189,18 @@ std::vector<std::string> freon::Defroster::load_arraystring(std::string identifi
 		vector.push_back(v.GetString());
 	}
 	return vector;
+}
+
+std::vector<std::vector<std::string>> freon::Defroster::load_matrixstring(std::string identifier)
+{
+	rapidjson::Value &value = this->document[identifier.c_str()];
+	std::vector<std::vector<std::string>> matrix;
+	for (auto & array : value.GetArray()) {
+		std::vector<std::string> new_row;
+		for (auto & v : array.GetArray()) {
+			new_row.push_back(v.GetString());
+		}
+		matrix.push_back(new_row);
+	}
+	return matrix;
 }

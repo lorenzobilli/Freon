@@ -46,17 +46,20 @@ namespace freon {
 				Integer,
 				String,
 				ArrayString,
+				MatrixString,
 			};
 			struct Value {
 				bool b;
 				int i;
 				std::string s;
 				std::vector<std::string> vs;
+				std::vector<std::vector<std::string>> ms;
 			};
 			Field(Type type, bool value);
 			Field(Type type, int value);
 			Field(Type type, std::string value);
 			Field(Type type, std::vector<std::string> values);
+			Field(Type type, std::vector<std::vector<std::string>> values);
 			Type get_type();
 			Value get_value();
 		private:
@@ -69,6 +72,7 @@ namespace freon {
 		void add(std::string identifier, Field::Type type, int value);
 		void add(std::string identifier, Field::Type type, std::string value);
 		void add(std::string identifier, Field::Type type, std::vector<std::string> values);
+		void add(std::string identifier, Field::Type type, std::vector<std::vector<std::string>> values);
 		void store();
 		std::string get_json();
 	private:
@@ -84,6 +88,7 @@ namespace freon {
 		int load_int(std::string identifier);
 		std::string load_string(std::string identifier);
 		std::vector<std::string> load_arraystring(std::string identifier);
+		std::vector<std::vector<std::string>> load_matrixstring(std::string identifier);
 	private:
 		rapidjson::Document document;
 	};
