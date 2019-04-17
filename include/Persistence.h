@@ -74,7 +74,7 @@ namespace freon {
 		void add(std::string identifier, Field::Type type, std::vector<std::string> values);
 		void add(std::string identifier, Field::Type type, std::vector<std::vector<std::string>> values);
 		void generate_json();
-		std::string get_json();
+		std::string retrieve_json();
 	private:
 		rapidjson::StringBuffer buffer;
 		std::unordered_map<std::string, Field> buffer_area;

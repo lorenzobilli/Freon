@@ -107,7 +107,7 @@ void freon::Freezer::generate_json()
 	writer.EndObject();
 }
 
-std::string freon::Freezer::get_json()
+std::string freon::Freezer::retrieve_json()
 {
 	return buffer.GetString();
 }

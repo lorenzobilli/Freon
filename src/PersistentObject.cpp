@@ -43,7 +43,7 @@ void freon::PersistentObject::store(std::string object, std::string id)
 
 	std::ofstream writer;
 	writer.open(filename);
-	writer << storer.get_json();
+	writer << storer.retrieve_json();
 	writer.close();
 }
 
