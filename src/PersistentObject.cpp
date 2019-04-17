@@ -27,7 +27,7 @@
 
 #include "PersistentObject.h"
 
-void PersistentObject::store(std::string object, std::string id)
+void freon::PersistentObject::store(std::string object, std::string id)
 {
 	this->object = object;
 	this->id = id;
@@ -47,13 +47,13 @@ void PersistentObject::store(std::string object, std::string id)
 	writer.close();
 }
 
-void PersistentObject::store(std::string prefix, std::string object, std::string id)
+void freon::PersistentObject::store(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
 	store(object, id);
 }
 
-void PersistentObject::load(std::string object, std::string id)
+void freon::PersistentObject::load(std::string object, std::string id)
 {
 	this->object = object;
 	this->id = id;
@@ -78,13 +78,13 @@ void PersistentObject::load(std::string object, std::string id)
 	load_all();
 }
 
-void PersistentObject::load(std::string prefix, std::string object, std::string id)
+void freon::PersistentObject::load(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
 	load(object, id);
 }
 
-std::string PersistentObject::get_nested_prefix()
+std::string freon::PersistentObject::get_nested_prefix()
 {
 	std::string nested_prefix;
 

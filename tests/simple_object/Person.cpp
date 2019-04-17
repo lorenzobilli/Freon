@@ -1,4 +1,4 @@
-#include <utility>
+#include <string>
 
 #include "Person.h"
 
@@ -22,8 +22,8 @@ std::string Person::get_surname()
 
 void Person::store_all()
 {
-	get_storer().add("name", Persistence::Serialize::Field::Type::String, name);
-	get_storer().add("surname", Persistence::Serialize::Field::Type::String, surname);
+	get_storer().add("name", freon::Serialize::Field::Type::String, name);
+	get_storer().add("surname", freon::Serialize::Field::Type::String, surname);
 }
 
 void Person::load_all()

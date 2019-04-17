@@ -4,7 +4,7 @@
 
 #include <PersistentObject.h>
 
-class Person : public PersistentObject {
+class Person : public freon::PersistentObject {
 public:
 	Person();
 	Person(std::string name, std::string surname);

@@ -20,44 +20,44 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  src/Persistence.cpp
+ *  src/freon.cpp
  *
- *  Implementation of all methods of the Persistence module.
+ *  Implementation of all methods of the freon module.
  */
 
 #include <Persistence.h>
 
-Persistence::Serialize::Serialize() = default;
+freon::Serialize::Serialize() = default;
 
-Persistence::Serialize::Serialize(const Serialize &serialize)
+freon::Serialize::Serialize(const Serialize &serialize)
 {
 }
 
-void Persistence::Serialize::add(std::string identifier, Field::Type type, bool value)
-{
-	Field field = Field(type, value);
-	buffer_area.insert({identifier, field});
-}
-
-void Persistence::Serialize::add(std::string identifier, Field::Type type, int value)
+void freon::Serialize::add(std::string identifier, Field::Type type, bool value)
 {
 	Field field = Field(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void Persistence::Serialize::add(std::string identifier, Field::Type type, std::string value)
+void freon::Serialize::add(std::string identifier, Field::Type type, int value)
 {
 	Field field = Field(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void Persistence::Serialize::add(std::string identifier, Field::Type type, std::vector<std::string> values)
+void freon::Serialize::add(std::string identifier, Field::Type type, std::string value)
+{
+	Field field = Field(type, value);
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Serialize::add(std::string identifier, Field::Type type, std::vector<std::string> values)
 {
 	Field field = Field(type, values);
 	buffer_area.insert({identifier, field});
 }
 
-void Persistence::Serialize::store()
+void freon::Serialize::store()
 {
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(this->buffer);
 
@@ -89,75 +89,75 @@ void Persistence::Serialize::store()
 	writer.EndObject();
 }
 
-std::string Persistence::Serialize::get_json()
+std::string freon::Serialize::get_json()
 {
 	return buffer.GetString();
 }
 
-Persistence::Serialize::Field::Field(Type type, bool value)
+freon::Serialize::Field::Field(Type type, bool value)
 {
 	this->type = type;
 	this->value.b = value;
 }
 
-Persistence::Serialize::Field::Field(Type type, int value)
+freon::Serialize::Field::Field(Type type, int value)
 {
 	this->type = type;
 	this->value.i = value;
 }
 
-Persistence::Serialize::Field::Field(Type type, std::string value)
+freon::Serialize::Field::Field(Type type, std::string value)
 {
 	this->type = type;
 	this->value.s = value;
 }
 
-Persistence::Serialize::Field::Field(Type type, std::vector<std::string> values)
+freon::Serialize::Field::Field(Type type, std::vector<std::string> values)
 {
 	this->type = type;
 	this->value.vs = values;
 }
 
-Persistence::Serialize::Field::Type Persistence::Serialize::Field::get_type()
+freon::Serialize::Field::Type freon::Serialize::Field::get_type()
 {
 	return type;
 }
 
-Persistence::Serialize::Field::Value Persistence::Serialize::Field::get_value()
+freon::Serialize::Field::Value freon::Serialize::Field::get_value()
 {
 	return value;
 }
 
-Persistence::Deserialize::Deserialize() = default;
+freon::Deserialize::Deserialize() = default;
 
-Persistence::Deserialize::Deserialize(const Persistence::Deserialize &deserialize)
+freon::Deserialize::Deserialize(const freon::Deserialize &deserialize)
 {
 }
 
-void Persistence::Deserialize::initialize(std::string json)
+void freon::Deserialize::initialize(std::string json)
 {
 	this->document.Parse(json.c_str());
 }
 
-bool Persistence::Deserialize::load_bool(std::string identifier)
+bool freon::Deserialize::load_bool(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	return value.GetBool();
 }
 
-int Persistence::Deserialize::load_int(std::string identifier)
+int freon::Deserialize::load_int(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	return value.GetInt();
 }
 
-std::string Persistence::Deserialize::load_string(std::string identifier)
+std::string freon::Deserialize::load_string(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	return value.GetString();
 }
 
-std::vector<std::string> Persistence::Deserialize::load_arraystring(std::string identifier)
+std::vector<std::string> freon::Deserialize::load_arraystring(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	std::vector<std::string> vector;

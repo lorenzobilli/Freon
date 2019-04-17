@@ -20,9 +20,9 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  src/Persistence.h
+ *  src/freon.h
  *
- *  Public header of the Persistence module.
+ *  Public header of the freon module.
  */
 
 #pragma once
@@ -36,7 +36,7 @@
 #include <rapidjson/prettywriter.h>
 #include <rapidjson/document.h>
 
-namespace Persistence {
+namespace freon {
 	class Serialize {
 	public:
 		class Field {

@@ -20,7 +20,7 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  src/Persistence.cpp
+ *  src/freon.cpp
  *
  *  Public header of the PersistentObject module.
  */
@@ -32,24 +32,25 @@
 
 #include <Persistence.h>
 
-class PersistentObject
-{
-public:
-	void store(std::string object, std::string id);
-	void store(std::string prefix, std::string object, std::string id);
-	void load(std::string object, std::string id);
-	void load(std::string prefix, std::string object, std::string id);
-	Persistence::Serialize & get_storer() { return storer; }
-	Persistence::Deserialize & get_loader() { return loader; }
-	std::string get_filename() { return filename; }
-	std::string get_nested_prefix();
-private:
-	Persistence::Serialize storer;
-	Persistence::Deserialize loader;
-	std::string prefix;
-	std::string object;
-	std::string id;
-	std::string filename;
-	virtual void store_all() = 0;
-	virtual void load_all() = 0;
-};
+namespace freon {
+	class PersistentObject {
+	public:
+		void store(std::string object, std::string id);
+		void store(std::string prefix, std::string object, std::string id);
+		void load(std::string object, std::string id);
+		void load(std::string prefix, std::string object, std::string id);
+		freon::Serialize &get_storer() { return storer; }
+		freon::Deserialize &get_loader() { return loader; }
+		std::string get_filename() { return filename; }
+		std::string get_nested_prefix();
+	private:
+		freon::Serialize storer;
+		freon::Deserialize loader;
+		std::string prefix;
+		std::string object;
+		std::string id;
+		std::string filename;
+		virtual void store_all() = 0;
+		virtual void load_all() = 0;
+	};
+}
