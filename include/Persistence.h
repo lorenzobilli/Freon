@@ -73,7 +73,7 @@ namespace freon {
 		void add(std::string identifier, Field::Type type, std::string value);
 		void add(std::string identifier, Field::Type type, std::vector<std::string> values);
 		void add(std::string identifier, Field::Type type, std::vector<std::vector<std::string>> values);
-		void store();
+		void generate_json();
 		std::string get_json();
 	private:
 		rapidjson::StringBuffer buffer;

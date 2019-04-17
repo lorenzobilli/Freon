@@ -33,7 +33,7 @@ void freon::PersistentObject::store(std::string object, std::string id)
 	this->id = id;
 
 	store_all();
-	storer.store();
+	storer.generate_json();
 
 	if (this->prefix != "") {
 		filename = this->prefix + "_" + this->object + "_" + this->id + ".json";

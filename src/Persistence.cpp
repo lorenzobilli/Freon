@@ -63,7 +63,7 @@ void freon::Freezer::add(std::string identifier, Field::Type type, std::vector<s
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::store()
+void freon::Freezer::generate_json()
 {
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(this->buffer);
 
