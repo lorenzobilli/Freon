@@ -20,9 +20,9 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  src/freon.h
+ *  include/Freezer.h
  *
- *  Public header of the freon module.
+ *  Public header of the Freezer module.
  */
 
 #pragma once
@@ -78,18 +78,5 @@ namespace freon {
 	private:
 		rapidjson::StringBuffer buffer;
 		std::unordered_map<std::string, Field> buffer_area;
-	};
-	class Defroster {
-	public:
-		Defroster();
-		Defroster(const Defroster &deserialize);
-		void initialize(std::string json);
-		bool load_bool(std::string identifier);
-		int load_int(std::string identifier);
-		std::string load_string(std::string identifier);
-		std::vector<std::string> load_arraystring(std::string identifier);
-		std::vector<std::vector<std::string>> load_matrixstring(std::string identifier);
-	private:
-		rapidjson::Document document;
 	};
 }

@@ -20,38 +20,34 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  src/freon.cpp
+ *  include/Defroster.h
  *
- *  Public header of the Freezable module.
+ *  Public header of the Defroster module.
  */
 
 #pragma once
 
-#include <fstream>
 #include <string>
+#include <vector>
+#include <map>
+#include <unordered_map>
 
-#include <Freezer.h>
-#include <Defroster.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/prettywriter.h>
+#include <rapidjson/document.h>
 
 namespace freon {
-	class Freezable {
+	class Defroster {
 	public:
-		void store(std::string object, std::string id);
-		void store(std::string prefix, std::string object, std::string id);
-		void load(std::string object, std::string id);
-		void load(std::string prefix, std::string object, std::string id);
-		freon::Freezer &get_storer() { return storer; }
-		freon::Defroster &get_loader() { return loader; }
-		std::string get_filename() { return filename; }
-		std::string get_nested_prefix();
+		Defroster();
+		Defroster(const Defroster &deserialize);
+		void initialize(std::string json);
+		bool load_bool(std::string identifier);
+		int load_int(std::string identifier);
+		std::string load_string(std::string identifier);
+		std::vector<std::string> load_arraystring(std::string identifier);
+		std::vector<std::vector<std::string>> load_matrixstring(std::string identifier);
 	private:
-		freon::Freezer storer;
-		freon::Defroster loader;
-		std::string prefix;
-		std::string object;
-		std::string id;
-		std::string filename;
-		virtual void store_all() = 0;
-		virtual void load_all() = 0;
+		rapidjson::Document document;
 	};
 }

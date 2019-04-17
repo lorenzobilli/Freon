@@ -20,12 +20,13 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  src/freon.cpp
+ *  src/Freezer.cpp
  *
- *  Implementation of all methods of the freon module.
+ *  Implementation of all methods of the Freezer module.
  */
 
-#include <Persistence.h>
+#include <Freezer.h>
+
 
 freon::Freezer::Freezer() = default;
 
@@ -150,57 +151,4 @@ freon::Freezer::Field::Type freon::Freezer::Field::get_type()
 freon::Freezer::Field::Value freon::Freezer::Field::get_value()
 {
 	return value;
-}
-
-freon::Defroster::Defroster() = default;
-
-freon::Defroster::Defroster(const freon::Defroster &deserialize)
-{
-}
-
-void freon::Defroster::initialize(std::string json)
-{
-	this->document.Parse(json.c_str());
-}
-
-bool freon::Defroster::load_bool(std::string identifier)
-{
-	rapidjson::Value &value = this->document[identifier.c_str()];
-	return value.GetBool();
-}
-
-int freon::Defroster::load_int(std::string identifier)
-{
-	rapidjson::Value &value = this->document[identifier.c_str()];
-	return value.GetInt();
-}
-
-std::string freon::Defroster::load_string(std::string identifier)
-{
-	rapidjson::Value &value = this->document[identifier.c_str()];
-	return value.GetString();
-}
-
-std::vector<std::string> freon::Defroster::load_arraystring(std::string identifier)
-{
-	rapidjson::Value &value = this->document[identifier.c_str()];
-	std::vector<std::string> vector;
-	for (auto & v : value.GetArray()) {
-		vector.push_back(v.GetString());
-	}
-	return vector;
-}
-
-std::vector<std::vector<std::string>> freon::Defroster::load_matrixstring(std::string identifier)
-{
-	rapidjson::Value &value = this->document[identifier.c_str()];
-	std::vector<std::vector<std::string>> matrix;
-	for (auto & array : value.GetArray()) {
-		std::vector<std::string> new_row;
-		for (auto & v : array.GetArray()) {
-			new_row.push_back(v.GetString());
-		}
-		matrix.push_back(new_row);
-	}
-	return matrix;
 }
