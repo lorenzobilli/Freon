@@ -27,40 +27,39 @@
 
 #include <Freezer.h>
 
-
 freon::Freezer::Freezer() = default;
 
 freon::Freezer::Freezer(const Freezer &serialize)
 {
 }
 
-void freon::Freezer::add(std::string identifier, Field::Type type, bool value)
+void freon::Freezer::add(std::string identifier, Item::Type type, bool value)
 {
-	Field field = Field(type, value);
+	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(std::string identifier, Field::Type type, int value)
+void freon::Freezer::add(std::string identifier, Item::Type type, int value)
 {
-	Field field = Field(type, value);
+	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(std::string identifier, Field::Type type, std::string value)
+void freon::Freezer::add(std::string identifier, Item::Type type, std::string value)
 {
-	Field field = Field(type, value);
+	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(std::string identifier, Field::Type type, std::vector<std::string> values)
+void freon::Freezer::add(std::string identifier, Item::Type type, std::vector<std::string> values)
 {
-	Field field = Field(type, values);
+	Item field = Item(type, values);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(std::string identifier, Field::Type type, std::vector<std::vector<std::string>> values)
+void freon::Freezer::add(std::string identifier, Item::Type type, std::vector<std::vector<std::string>> values)
 {
-	Field field = Field(type, values);
+	Item field = Item(type, values);
 	buffer_area.insert({identifier, field});
 }
 
@@ -71,19 +70,19 @@ void freon::Freezer::generate_json()
 	writer.StartObject();
 	for (auto field : buffer_area) {
 		switch (field.second.get_type()) {
-			case Field::Type::Boolean:
+			case Item::Type::Boolean:
 				writer.String(field.first.c_str());
 				writer.Bool(field.second.get_value().b);
 				break;
-			case Field::Type::Integer:
+			case Item::Type::Integer:
 				writer.String(field.first.c_str());
 				writer.Int(field.second.get_value().i);
 				break;
-			case Field::Type::String:
+			case Item::Type::String:
 				writer.String(field.first.c_str());
 				writer.String(field.second.get_value().s.c_str());
 				break;
-			case Field::Type::ArrayString:
+			case Item::Type::ArrayString:
 				writer.String(field.first.c_str());
 				writer.StartArray();
 				for (auto value : field.second.get_value().vs) {
@@ -91,7 +90,7 @@ void freon::Freezer::generate_json()
 				}
 				writer.EndArray();
 				break;
-			case Field::Type::MatrixString:
+			case Item::Type::MatrixString:
 				writer.String(field.first.c_str());
 				writer.StartArray();
 				for (auto i = 0; i < field.second.get_value().ms.size(); i++) {
@@ -111,44 +110,4 @@ void freon::Freezer::generate_json()
 std::string freon::Freezer::retrieve_json()
 {
 	return buffer.GetString();
-}
-
-freon::Freezer::Field::Field(Type type, bool value)
-{
-	this->type = type;
-	this->value.b = value;
-}
-
-freon::Freezer::Field::Field(Type type, int value)
-{
-	this->type = type;
-	this->value.i = value;
-}
-
-freon::Freezer::Field::Field(Type type, std::string value)
-{
-	this->type = type;
-	this->value.s = value;
-}
-
-freon::Freezer::Field::Field(Type type, std::vector<std::string> values)
-{
-	this->type = type;
-	this->value.vs = values;
-}
-
-freon::Freezer::Field::Field(Type type, std::vector<std::vector<std::string>> values)
-{
-	this->type = type;
-	this->value.ms = values;
-}
-
-freon::Freezer::Field::Type freon::Freezer::Field::get_type()
-{
-	return type;
-}
-
-freon::Freezer::Field::Value freon::Freezer::Field::get_value()
-{
-	return value;
 }

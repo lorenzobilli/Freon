@@ -20,38 +20,49 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  include/Freezer.h
+ *  src/Item.cpp
  *
- *  Public header of the Freezer module.
+ *  Implementation of the Item module.
  */
-
-#pragma once
-
-#include <string>
-#include <vector>
-#include <map>
-#include <unordered_map>
-
-#include <rapidjson/stringbuffer.h>
-#include <rapidjson/prettywriter.h>
-#include <rapidjson/document.h>
 
 #include <Item.h>
 
-namespace freon {
-	class Freezer {
-	public:
-		Freezer();
-		Freezer(const Freezer &serialize);
-		void add(std::string identifier, Item::Type type, bool value);
-		void add(std::string identifier, Item::Type type, int value);
-		void add(std::string identifier, Item::Type type, std::string value);
-		void add(std::string identifier, Item::Type type, std::vector<std::string> values);
-		void add(std::string identifier, Item::Type type, std::vector<std::vector<std::string>> values);
-		void generate_json();
-		std::string retrieve_json();
-	private:
-		rapidjson::StringBuffer buffer;
-		std::unordered_map<std::string, Item> buffer_area;
-	};
+freon::Item::Item(Type type, bool value)
+{
+	this->type = type;
+	this->value.b = value;
+}
+
+freon::Item::Item(Type type, int value)
+{
+	this->type = type;
+	this->value.i = value;
+}
+
+freon::Item::Item(Type type, std::string value)
+{
+	this->type = type;
+	this->value.s = value;
+}
+
+freon::Item::Item(Type type, std::vector<std::string> values)
+{
+	this->type = type;
+	this->value.vs = values;
+}
+
+freon::Item::Item(Type type, std::vector<std::vector<std::string>> values)
+{
+	this->type = type;
+	this->value.ms = values;
+}
+
+freon::Item::Item::Type freon::Item::get_type()
+{
+	return type;
+}
+
+freon::Item::Item::Value freon::Item::get_value()
+{
+	return value;
 }
