@@ -7,6 +7,8 @@ message("> Project: \"${PROJECT_NAME}\" - Version: ${PROJECT_VERSION}")
 
 set(CMAKE_CXX_STANDARD 11)
 
+find_package(RapidJSON CONFIG REQUIRED)
+
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	set(CMAKE_CXX_FLAGS "/Wall")
 	set(CMAKE_CXX_FLAGS_RELEASE "-O2")
@@ -24,7 +26,8 @@ elseif(CMAKE_BUILD_TYPE MATCHES Release)
 	message("- Using compiler flags: ${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_RELEASE}")
 endif()
 
-include_directories(${CMAKE_SOURCE_DIR}/external/include)
+include_directories(${RAPIDJSON_INCLUDE_DIRS})
+
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/src)
