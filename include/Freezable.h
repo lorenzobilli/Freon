@@ -36,22 +36,22 @@
 namespace freon {
 	class Freezable {
 	public:
-		void store(std::string object, std::string id);
-		void store(std::string prefix, std::string object, std::string id);
-		void load(std::string object, std::string id);
-		void load(std::string prefix, std::string object, std::string id);
-		freon::Freezer &get_storer() { return storer; }
-		freon::Defroster &get_loader() { return loader; }
+		void freeze(std::string object, std::string id);
+		void freeze(std::string prefix, std::string object, std::string id);
+		void defrost(std::string object, std::string id);
+		void defrost(std::string prefix, std::string object, std::string id);
+		freon::Freezer &get_freezer() { return freezer; }
+		freon::Defroster &get_defroster() { return defroster; }
 		std::string get_filename() { return filename; }
 		std::string get_nested_prefix();
 	private:
-		freon::Freezer storer;
-		freon::Defroster loader;
+		freon::Freezer freezer;
+		freon::Defroster defroster;
 		std::string prefix;
 		std::string object;
 		std::string id;
 		std::string filename;
-		virtual void store_all() = 0;
-		virtual void load_all() = 0;
+		virtual void freeze_all() = 0;
+		virtual void defrost_all() = 0;
 	};
 }

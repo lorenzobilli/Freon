@@ -13,6 +13,6 @@ public:
 private:
 	std::string name;
 	std::string surname;
-	void store_all() override;
-	void load_all() override;
+	void freeze_all() override;
+	void defrost_all() override;
 };

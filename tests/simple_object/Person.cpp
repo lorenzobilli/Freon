@@ -20,14 +20,14 @@ std::string Person::get_surname()
 	return surname;
 }
 
-void Person::store_all()
+void Person::freeze_all()
 {
-	get_storer().add("name", freon::Item::Type::String, name);
-	get_storer().add("surname", freon::Item::Type::String, surname);
+	get_freezer().add("name", freon::Item::Type::String, name);
+	get_freezer().add("surname", freon::Item::Type::String, surname);
 }
 
-void Person::load_all()
+void Person::defrost_all()
 {
-	name = get_loader().load_string("name");
-	surname = get_loader().load_string("surname");
+	name = get_defroster().load_string("name");
+	surname = get_defroster().load_string("surname");
 }

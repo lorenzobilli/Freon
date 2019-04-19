@@ -27,13 +27,13 @@
 
 #include "Freezable.h"
 
-void freon::Freezable::store(std::string object, std::string id)
+void freon::Freezable::freeze(std::string object, std::string id)
 {
 	this->object = object;
 	this->id = id;
 
-	store_all();
-	storer.generate_json();
+	freeze_all();
+	freezer.generate_json();
 
 	if (this->prefix != "") {
 		filename = this->prefix + "_" + this->object + "_" + this->id + ".json";
@@ -43,17 +43,17 @@ void freon::Freezable::store(std::string object, std::string id)
 
 	std::ofstream writer;
 	writer.open(filename);
-	writer << storer.retrieve_json();
+	writer << freezer.retrieve_json();
 	writer.close();
 }
 
-void freon::Freezable::store(std::string prefix, std::string object, std::string id)
+void freon::Freezable::freeze(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
-	store(object, id);
+	freeze(object, id);
 }
 
-void freon::Freezable::load(std::string object, std::string id)
+void freon::Freezable::defrost(std::string object, std::string id)
 {
 	this->object = object;
 	this->id = id;
@@ -74,14 +74,14 @@ void freon::Freezable::load(std::string object, std::string id)
 		reader.close();
 	}
 
-	loader.initialize(json);
-	load_all();
+	defroster.initialize(json);
+	defrost_all();
 }
 
-void freon::Freezable::load(std::string prefix, std::string object, std::string id)
+void freon::Freezable::defrost(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
-	load(object, id);
+	defrost(object, id);
 }
 
 std::string freon::Freezable::get_nested_prefix()
