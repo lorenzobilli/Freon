@@ -42,11 +42,11 @@ namespace freon {
 		Defroster();
 		Defroster(const Defroster &deserialize);
 		void initialize(std::string json);
-		bool load_bool(std::string identifier);
-		int load_int(std::string identifier);
-		std::string load_string(std::string identifier);
-		std::vector<std::string> load_arraystring(std::string identifier);
-		std::vector<std::vector<std::string>> load_matrixstring(std::string identifier);
+		bool add_bool(std::string identifier);
+		int add_int(std::string identifier);
+		std::string add_string(std::string identifier);
+		std::vector<std::string> add_arraystring(std::string identifier);
+		std::vector<std::vector<std::string>> add_matrixstring(std::string identifier);
 	private:
 		rapidjson::Document document;
 	};

@@ -39,25 +39,25 @@ void freon::Defroster::initialize(std::string json)
 	this->document.Parse(json.c_str());
 }
 
-bool freon::Defroster::load_bool(std::string identifier)
+bool freon::Defroster::add_bool(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	return value.GetBool();
 }
 
-int freon::Defroster::load_int(std::string identifier)
+int freon::Defroster::add_int(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	return value.GetInt();
 }
 
-std::string freon::Defroster::load_string(std::string identifier)
+std::string freon::Defroster::add_string(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	return value.GetString();
 }
 
-std::vector<std::string> freon::Defroster::load_arraystring(std::string identifier)
+std::vector<std::string> freon::Defroster::add_arraystring(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	std::vector<std::string> vector;
@@ -67,7 +67,7 @@ std::vector<std::string> freon::Defroster::load_arraystring(std::string identifi
 	return vector;
 }
 
-std::vector<std::vector<std::string>> freon::Defroster::load_matrixstring(std::string identifier)
+std::vector<std::vector<std::string>> freon::Defroster::add_matrixstring(std::string identifier)
 {
 	rapidjson::Value &value = this->document[identifier.c_str()];
 	std::vector<std::vector<std::string>> matrix;

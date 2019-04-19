@@ -28,6 +28,6 @@ void Person::freeze_all()
 
 void Person::defrost_all()
 {
-	name = get_defroster().load_string("name");
-	surname = get_defroster().load_string("surname");
+	name = get_defroster().add_string("name");
+	surname = get_defroster().add_string("surname");
 }
