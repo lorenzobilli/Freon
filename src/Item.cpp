@@ -57,6 +57,12 @@ freon::Item::Item(Type type, std::vector<std::vector<std::string>> values)
 	this->value.ms = values;
 }
 
+freon::Item::Item(Type type, std::vector<std::vector<std::vector<std::string>>> values)
+{
+	this->type = type;
+	this->value.ts = values;
+}
+
 freon::Item::Item::Type freon::Item::get_type()
 {
 	return type;

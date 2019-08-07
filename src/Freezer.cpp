@@ -63,6 +63,12 @@ void freon::Freezer::add(std::string identifier, Item::Type type, std::vector<st
 	buffer_area.insert({identifier, field});
 }
 
+void freon::Freezer::add(std::string identifier, Item::Type type, std::vector<std::vector<std::vector<std::string>>> values)
+{
+	Item field = Item(type, values);
+	buffer_area.insert({identifier, field});
+}
+
 void freon::Freezer::generate_json()
 {
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(this->buffer);
@@ -97,6 +103,22 @@ void freon::Freezer::generate_json()
 					writer.StartArray();
 					for (auto j = 0; j < field.second.get_value().ms.size(); j++) {
 						writer.String(field.second.get_value().ms.at(i).at(j).c_str());
+					}
+					writer.EndArray();
+				}
+				writer.EndArray();
+				break;
+			case Item::Type::TensorString:
+				writer.String(field.first.c_str());
+				writer.StartArray();
+				for (auto i = 0; i < field.second.get_value().ts.size(); i++) {
+					writer.StartArray();
+					for (auto j = 0; j < field.second.get_value().ts.size(); j++) {
+						writer.StartArray();
+						for (auto k = 0; k < field.second.get_value().ts.size(); k++) {
+							writer.String(field.second.get_value().ts.at(i).at(j).at(k).c_str());
+						}
+						writer.EndArray();
 					}
 					writer.EndArray();
 				}

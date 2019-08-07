@@ -48,6 +48,7 @@ namespace freon {
 		void add(std::string identifier, Item::Type type, std::string value);
 		void add(std::string identifier, Item::Type type, std::vector<std::string> values);
 		void add(std::string identifier, Item::Type type, std::vector<std::vector<std::string>> values);
+		void add(std::string identifier, Item::Type type, std::vector<std::vector<std::vector<std::string>>> values);
 		void generate_json();
 		std::string retrieve_json();
 	private:

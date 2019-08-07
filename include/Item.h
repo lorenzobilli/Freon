@@ -39,6 +39,7 @@ namespace freon {
 			String,
 			ArrayString,
 			MatrixString,
+			TensorString
 		};
 		struct Value {
 			bool b;
@@ -46,12 +47,14 @@ namespace freon {
 			std::string s;
 			std::vector<std::string> vs;
 			std::vector<std::vector<std::string>> ms;
+			std::vector<std::vector<std::vector<std::string>>> ts;
 		};
 		Item(Type type, bool value);
 		Item(Type type, int value);
 		Item(Type type, std::string value);
 		Item(Type type, std::vector<std::string> values);
 		Item(Type type, std::vector<std::vector<std::string>> values);
+		Item(Type type, std::vector<std::vector<std::vector<std::string>>> values);
 		Type get_type();
 		Value get_value();
 	private:
