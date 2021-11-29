@@ -53,18 +53,6 @@ freon::Item::Item(Type type, std::vector<std::string> values)
 	this->value.vs = std::move(values);
 }
 
-freon::Item::Item(Type type, std::vector<std::vector<std::string>> values)
-{
-	this->type = type;
-	this->value.ms = std::move(values);
-}
-
-freon::Item::Item(Type type, std::vector<std::vector<std::vector<std::string>>> values)
-{
-	this->type = type;
-	this->value.ts = std::move(values);
-}
-
 freon::Item::Item::Type freon::Item::get_type()
 {
 	return type;

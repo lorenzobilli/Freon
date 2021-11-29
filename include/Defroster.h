@@ -46,8 +46,6 @@ namespace freon {
 		int add_int(const std::string& identifier);
 		std::string add_string(const std::string& identifier);
 		std::vector<std::string> add_arraystring(const std::string& identifier);
-		std::vector<std::vector<std::string>> add_matrixstring(const std::string& identifier);
-		std::vector<std::vector<std::vector<std::string>>> add_tensorstring(const std::string& identifier);
 	private:
 		rapidjson::Document document;
 	};

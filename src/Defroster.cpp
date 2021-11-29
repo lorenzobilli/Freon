@@ -66,35 +66,3 @@ std::vector<std::string> freon::Defroster::add_arraystring(const std::string& id
 	}
 	return vector;
 }
-
-std::vector<std::vector<std::string>> freon::Defroster::add_matrixstring(const std::string& identifier)
-{
-	rapidjson::Value &value = this->document[identifier.c_str()];
-	std::vector<std::vector<std::string>> matrix;
-	for (auto & array : value.GetArray()) {
-		std::vector<std::string> new_row;
-		for (auto & v : array.GetArray()) {
-			new_row.emplace_back(v.GetString());
-		}
-		matrix.push_back(new_row);
-	}
-	return matrix;
-}
-
-std::vector<std::vector<std::vector<std::string>>> freon::Defroster::add_tensorstring(const std::string& identifier)
-{
-	rapidjson::Value &value = this->document[identifier.c_str()];
-	std::vector<std::vector<std::vector<std::string>>> tensor;
-	for (auto & array : value.GetArray()) {
-		std::vector<std::vector<std::string>> new_row;
-		for (auto & row : array.GetArray()) {
-			std::vector<std::string> new_layer;
-			for (auto & layer : row.GetArray()) {
-				new_layer.emplace_back(layer.GetString());
-			}
-			new_row.push_back(new_layer);
-		}
-		tensor.push_back(new_row);
-	}
-	return tensor;
-}

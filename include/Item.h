@@ -37,9 +37,7 @@ namespace freon {
 			Boolean,
 			Integer,
 			String,
-			ArrayString,
-			MatrixString,
-			TensorString
+			ArrayString
 		};
 		struct Value {
 			bool b;
@@ -53,8 +51,6 @@ namespace freon {
 		Item(Type type, int value);
 		Item(Type type, std::string value);
 		Item(Type type, std::vector<std::string> values);
-		Item(Type type, std::vector<std::vector<std::string>> values);
-		Item(Type type, std::vector<std::vector<std::vector<std::string>>> values);
 		Type get_type();
 		Value get_value();
 	private:
