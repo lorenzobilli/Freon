@@ -27,6 +27,8 @@
 
 #include <Item.h>
 
+#include <utility>
+
 freon::Item::Item(Type type, bool value)
 {
 	this->type = type;
@@ -42,25 +44,25 @@ freon::Item::Item(Type type, int value)
 freon::Item::Item(Type type, std::string value)
 {
 	this->type = type;
-	this->value.s = value;
+	this->value.s = std::move(value);
 }
 
 freon::Item::Item(Type type, std::vector<std::string> values)
 {
 	this->type = type;
-	this->value.vs = values;
+	this->value.vs = std::move(values);
 }
 
 freon::Item::Item(Type type, std::vector<std::vector<std::string>> values)
 {
 	this->type = type;
-	this->value.ms = values;
+	this->value.ms = std::move(values);
 }
 
 freon::Item::Item(Type type, std::vector<std::vector<std::vector<std::string>>> values)
 {
 	this->type = type;
-	this->value.ts = values;
+	this->value.ts = std::move(values);
 }
 
 freon::Item::Item::Type freon::Item::get_type()

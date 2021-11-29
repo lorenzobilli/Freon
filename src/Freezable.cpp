@@ -35,7 +35,7 @@ void freon::Freezable::freeze(std::string object, std::string id)
 	freeze_all();
 	freezer.generate_json();
 
-	if (this->prefix != "") {
+	if (!this->prefix.empty()) {
 		filename = this->prefix + "_" + this->object + "_" + this->id + ".json";
 	} else {
 		filename = this->object + "_" + this->id + ".json";
@@ -50,7 +50,7 @@ void freon::Freezable::freeze(std::string object, std::string id)
 void freon::Freezable::freeze(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
-	freeze(object, id);
+	freeze(std::move(object), std::move(id));
 }
 
 void freon::Freezable::defrost(std::string object, std::string id)
@@ -58,7 +58,7 @@ void freon::Freezable::defrost(std::string object, std::string id)
 	this->object = object;
 	this->id = id;
 
-	if (this->prefix != "") {
+	if (!this->prefix.empty()) {
 		filename = this->prefix + "_" + this->object + "_" + this->id + ".json";
 	} else {
 		filename = this->object + "_" + this->id + ".json";
@@ -81,14 +81,14 @@ void freon::Freezable::defrost(std::string object, std::string id)
 void freon::Freezable::defrost(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
-	defrost(object, id);
+	defrost(std::move(object), std::move(id));
 }
 
 std::string freon::Freezable::get_nested_prefix()
 {
 	std::string nested_prefix;
 
-	if (prefix != "") {
+	if (!prefix.empty()) {
 		nested_prefix = prefix + "_" + object + "_" + id;
 	} else {
 		nested_prefix = object + "_" + id;

@@ -9,7 +9,7 @@
 class Array : public freon::Freezable {
 public:
 	Array();
-	void populate(std::vector<std::string>);
+	void populate(const std::vector<std::string>&);
 	void print();
 private:
 	std::vector<std::string> array;

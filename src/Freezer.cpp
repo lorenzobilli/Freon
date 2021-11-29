@@ -27,45 +27,47 @@
 
 #include <Freezer.h>
 
+#include <utility>
+
 freon::Freezer::Freezer() = default;
 
 freon::Freezer::Freezer(const Freezer &serialize)
 {
 }
 
-void freon::Freezer::add(std::string identifier, Item::Type type, bool value)
+void freon::Freezer::add(const std::string& identifier, Item::Type type, bool value)
 {
 	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(std::string identifier, Item::Type type, int value)
+void freon::Freezer::add(const std::string& identifier, Item::Type type, int value)
 {
 	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(std::string identifier, Item::Type type, std::string value)
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::string value)
 {
-	Item field = Item(type, value);
+	Item field = Item(type, std::move(value));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(std::string identifier, Item::Type type, std::vector<std::string> values)
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<std::string> values)
 {
-	Item field = Item(type, values);
+	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(std::string identifier, Item::Type type, std::vector<std::vector<std::string>> values)
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<std::vector<std::string>> values)
 {
-	Item field = Item(type, values);
+	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(std::string identifier, Item::Type type, std::vector<std::vector<std::vector<std::string>>> values)
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<std::vector<std::vector<std::string>>> values)
 {
-	Item field = Item(type, values);
+	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
@@ -91,7 +93,7 @@ void freon::Freezer::generate_json()
 			case Item::Type::ArrayString:
 				writer.String(field.first.c_str());
 				writer.StartArray();
-				for (auto value : field.second.get_value().vs) {
+				for (const auto& value : field.second.get_value().vs) {
 					writer.String(value.c_str());
 				}
 				writer.EndArray();

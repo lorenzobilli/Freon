@@ -2,7 +2,7 @@
 
 Array::Array() = default;
 
-void Array::populate(std::vector<std::string> elems)
+void Array::populate(const std::vector<std::string>& elems)
 {
 	for (const auto& e : elems) {
 		this->array.push_back(e);
