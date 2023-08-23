@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include <Freezable.h>
+#include <freon.h>
 
 class Person : public freon::Freezable {
 public:

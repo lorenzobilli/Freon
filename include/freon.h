@@ -26,3 +26,6 @@
  */
 
 #include <Freezable.h>
+#include <Item.h>
+#include <Freezer.h>
+#include <Defroster.h>
