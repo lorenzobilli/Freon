@@ -33,28 +33,110 @@
 namespace freon {
 	class Item {
 	public:
+
 		enum class Type {
 			Boolean,
+			Character,
+			Short,
 			Integer,
+			LongInteger,
+			LongLongInteger,
+			UnsignedInteger,
+			UnsignedLongInteger,
+			UnsignedLongLongInteger,
+			Float,
+			Double,
 			String,
+			ArrayBoolean,
+			ArrayCharacter,
+			ArrayShort,
+			ArrayInteger,
+			ArrayLongInteger,
+			ArrayLongLongInteger,
+			ArrayUnsignedInteger,
+			ArrayUnsignedLongInteger,
+			ArrayUnsignedLongLongInteger,
+			ArrayFloat,
+			ArrayDouble,
 			ArrayString
 		};
+
+		enum class Container {
+			None,
+			Array
+		};
+
 		struct Value {
 			bool b;
+			char c;
+			short s;
 			int i;
-			std::string s;
-			std::vector<std::string> vs;
-			std::vector<std::vector<std::string>> ms;
-			std::vector<std::vector<std::vector<std::string>>> ts;
+			long l;
+			long long ll;
+			unsigned int ui;
+			unsigned long ul;
+			unsigned long long ull;
+			float f;
+			double d;
+			std::string ss;
+			std::vector<bool> vb;
+			std::vector<char> vc;
+			std::vector<short> vs;
+			std::vector<int> vi;
+			std::vector<long> vl;
+			std::vector<long long> vll;
+			std::vector<unsigned int> vui;
+			std::vector<unsigned long> vul;
+			std::vector<unsigned long long> vull;
+			std::vector<float> vf;
+			std::vector<double> vd;
+			std::vector<std::string> vss;
 		};
+
 		Item(Type type, bool value);
+		Item(Type type, char value);
 		Item(Type type, int value);
+		Item(Type type, long value);
+		Item(Type type, long long value);
+		Item(Type type, unsigned int value);
+		Item(Type type, unsigned long value);
+		Item(Type type, unsigned long long value);
+		Item(Type type, float value);
+		Item(Type type, double value);
 		Item(Type type, std::string value);
+
+		Item(Type type, Container container, bool value);
+		Item(Type type, Container container, char value);
+		Item(Type type, Container container, int value);
+		Item(Type type, Container container, long value);
+		Item(Type type, Container container, long long value);
+		Item(Type type, Container container, unsigned int value);
+		Item(Type type, Container container, unsigned long value);
+		Item(Type type, Container container, unsigned long long value);
+		Item(Type type, Container container, float value);
+		Item(Type type, Container container, double value);
+		Item(Type type, Container container, std::string value);
+
+
+
+		Item(Type type, std::vector<bool> values);
+		Item(Type type, std::vector<char> values);
+		Item(Type type, std::vector<short> values);
+		Item(Type type, std::vector<int> values);
+		Item(Type type, std::vector<long> values);
+		Item(Type type, std::vector<long long> value);
+		Item(Type type, std::vector<unsigned int> values);
+		Item(Type type, std::vector<unsigned long> values);
+		Item(Type type, std::vector<unsigned long long> values);
+		Item(Type type, std::vector<float> values);
+		Item(Type type, std::vector<double> values);
 		Item(Type type, std::vector<std::string> values);
 		Type get_type();
+		Container get_container();
 		Value get_value();
 	private:
 		Type type;
+		Container container;
 		Value value;
 	};
 }

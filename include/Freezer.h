@@ -45,7 +45,17 @@ namespace freon {
 		Freezer(const Freezer &serialize);
 		void add(const std::string& identifier, Item::Type type, bool value);
 		void add(const std::string& identifier, Item::Type type, int value);
+		void add(const std::string& identifier, Item::Type type, long value);
+		void add(const std::string& identifier, Item::Type type, unsigned int value);
+		void add(const std::string& identifier, Item::Type type, unsigned long value);
+		void add(const std::string& identifier, Item::Type type, double value);
 		void add(const std::string& identifier, Item::Type type, std::string value);
+		void add(const std::string& identifier, Item::Type type, std::vector<bool> values);
+		void add(const std::string& identifier, Item::Type type, std::vector<int> values);
+		void add(const std::string& identifier, Item::Type type, std::vector<long> values);
+		void add(const std::string& identifier, Item::Type type, std::vector<unsigned int> values);
+		void add(const std::string& identifier, Item::Type type, std::vector<unsigned long> values);
+		void add(const std::string& identifier, Item::Type type, std::vector<double> values);
 		void add(const std::string& identifier, Item::Type type, std::vector<std::string> values);
 		void generate_json();
 		std::string retrieve_json();

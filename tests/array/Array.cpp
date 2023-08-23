@@ -23,5 +23,5 @@ void Array::freeze_all()
 
 void Array::defrost_all()
 {
-	array = get_defroster().add_arraystring("array");
+	array = get_defroster().get_array_string("array");
 }

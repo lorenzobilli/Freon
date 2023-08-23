@@ -47,9 +47,69 @@ void freon::Freezer::add(const std::string& identifier, Item::Type type, int val
 	buffer_area.insert({identifier, field});
 }
 
+void freon::Freezer::add(const std::string& identifier, Item::Type type, long value)
+{
+	Item field = Item(type, value);
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(const std::string& identifier, Item::Type type, unsigned int value)
+{
+	Item field = Item(type, value);
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(const std::string& identifier, Item::Type type, unsigned long value)
+{
+	Item field = Item(type, value);
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(const std::string& identifier, Item::Type type, double value)
+{
+	Item field = Item(type, value);
+	buffer_area.insert({identifier, field});
+}
+
 void freon::Freezer::add(const std::string& identifier, Item::Type type, std::string value)
 {
 	Item field = Item(type, std::move(value));
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<bool> values)
+{
+	Item field = Item(type, std::move(values));
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<int> values)
+{
+	Item field = Item(type, std::move(values));
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<long> values)
+{
+	Item field = Item(type, std::move(values));
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<unsigned int> values)
+{
+	Item field = Item(type, std::move(values));
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<unsigned long> values)
+{
+	Item field = Item(type, std::move(values));
+	buffer_area.insert({identifier, field});
+}
+
+void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<double> values)
+{
+	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
@@ -74,14 +134,78 @@ void freon::Freezer::generate_json()
 				writer.String(field.first.c_str());
 				writer.Int(field.second.get_value().i);
 				break;
+			case Item::Type::LongInteger:
+				writer.String(field.first.c_str());
+				writer.Int64(field.second.get_value().l);
+				break;
+			case Item::Type::UnsignedInteger:
+				writer.String(field.first.c_str());
+				writer.Uint(field.second.get_value().ui);
+				break;
+			case Item::Type::UnsignedLongInteger:
+				writer.String(field.first.c_str());
+				writer.Uint64(field.second.get_value().ul);
+				break;
+			case Item::Type::Double:
+				writer.String(field.first.c_str());
+				writer.Double(field.second.get_value().d);
+				break;
 			case Item::Type::String:
 				writer.String(field.first.c_str());
-				writer.String(field.second.get_value().s.c_str());
+				writer.String(field.second.get_value().ss.c_str());
+				break;
+			case Item::Type::ArrayBoolean:
+				writer.String(field.first.c_str());
+				writer.StartArray();
+				for (const auto& value : field.second.get_value().vb) {
+					writer.Bool(value);
+				}
+				writer.EndArray();
+				break;
+			case Item::Type::ArrayInteger:
+				writer.String(field.first.c_str());
+				writer.StartArray();
+				for (const auto& value : field.second.get_value().vi) {
+					writer.Int(value);
+				}
+				writer.EndArray();
+				break;
+			case Item::Type::ArrayLongInteger:
+				writer.String(field.first.c_str());
+				writer.StartArray();
+				for (const auto& value : field.second.get_value().vl) {
+					writer.Int64(value);
+				}
+				writer.EndArray();
+				break;
+			case Item::Type::ArrayUnsignedInteger:
+				writer.String(field.first.c_str());
+				writer.StartArray();
+				for (const auto& value : field.second.get_value().vui) {
+					writer.Uint(value);
+				}
+				writer.EndArray();
+				break;
+			case Item::Type::ArrayUnsignedLongInteger:
+				writer.String(field.first.c_str());
+				writer.StartArray();
+				for (const auto& value : field.second.get_value().vul) {
+					writer.Uint64(value);
+				}
+				writer.EndArray();
+				break;
+			case Item::Type::ArrayDouble:
+				writer.String(field.first.c_str());
+				writer.StartArray();
+				for (const auto& value : field.second.get_value().vd) {
+					writer.Double(value);
+				}
+				writer.EndArray();
 				break;
 			case Item::Type::ArrayString:
 				writer.String(field.first.c_str());
 				writer.StartArray();
-				for (const auto& value : field.second.get_value().vs) {
+				for (const auto& value : field.second.get_value().vss) {
 					writer.String(value.c_str());
 				}
 				writer.EndArray();

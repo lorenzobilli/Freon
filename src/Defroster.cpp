@@ -39,27 +39,111 @@ void freon::Defroster::initialize(const std::string& json)
 	this->document.Parse(json.c_str());
 }
 
-bool freon::Defroster::add_bool(const std::string& identifier)
+bool freon::Defroster::get_boolean(const std::string& identifier)
 {
-	rapidjson::Value &value = this->document[identifier.c_str()];
+	auto &value = this->document[identifier.c_str()];
 	return value.GetBool();
 }
 
-int freon::Defroster::add_int(const std::string& identifier)
+int freon::Defroster::get_integer(const std::string& identifier)
 {
-	rapidjson::Value &value = this->document[identifier.c_str()];
+	auto &value = this->document[identifier.c_str()];
 	return value.GetInt();
 }
 
-std::string freon::Defroster::add_string(const std::string& identifier)
+long freon::Defroster::get_long_integer(const std::string &identifier)
 {
-	rapidjson::Value &value = this->document[identifier.c_str()];
+	auto &value = this->document[identifier.c_str()];
+	return value.GetInt64();
+}
+
+unsigned int freon::Defroster::get_unsigned_integer(const std::string &identifier)
+{
+	auto &value = this->document[identifier.c_str()];
+	return value.GetUint();
+}
+
+unsigned long freon::Defroster::get_unsigned_long_integer(const std::string &identifier)
+{
+	auto &value = this->document[identifier.c_str()];
+	return value.GetUint64();
+}
+
+double freon::Defroster::get_double(const std::string &identifier)
+{
+	auto &value = this->document[identifier.c_str()];
+	return value.GetDouble();
+}
+
+std::string freon::Defroster::get_string(const std::string& identifier)
+{
+	auto &value = this->document[identifier.c_str()];
 	return value.GetString();
 }
 
-std::vector<std::string> freon::Defroster::add_arraystring(const std::string& identifier)
+std::vector<bool> freon::Defroster::get_array_boolean(const std::string &identifier)
 {
-	rapidjson::Value &value = this->document[identifier.c_str()];
+	auto &value = this->document[identifier.c_str()];
+	std::vector<bool> vector;
+	for (auto & v : value.GetArray()) {
+		vector.emplace_back(v.GetBool());
+	}
+	return vector;
+}
+
+std::vector<int> freon::Defroster::get_array_integer(const std::string &identifier)
+{
+	auto &value = this->document[identifier.c_str()];
+	std::vector<int> vector;
+	for (auto & v : value.GetArray()) {
+		vector.emplace_back(v.GetInt());
+	}
+	return vector;
+}
+
+std::vector<long> freon::Defroster::get_array_long_integer(const std::string &identifier)
+{
+	auto &value = this->document[identifier.c_str()];
+	std::vector<long> vector;
+	for (auto & v : value.GetArray()) {
+		vector.emplace_back(v.GetInt64());
+	}
+	return vector;
+}
+
+std::vector<unsigned int> freon::Defroster::get_array_unsigned_integer(const std::string &identifier)
+{
+	auto &value = this->document[identifier.c_str()];
+	std::vector<unsigned int> vector;
+	for (auto & v : value.GetArray()) {
+		vector.emplace_back(v.GetUint());
+	}
+	return vector;
+}
+
+std::vector<unsigned long> freon::Defroster::get_array_unsigned_long_integer(const std::string &identifier)
+{
+	auto &value = this->document[identifier.c_str()];
+	std::vector<unsigned long> vector;
+	for (auto & v : value.GetArray()) {
+		vector.emplace_back(v.GetUint64());
+	}
+	return vector;
+}
+
+std::vector<double> freon::Defroster::get_array_double(const std::string &identifier)
+{
+	auto &value = this->document[identifier.c_str()];
+	std::vector<double> vector;
+	for (auto & v : value.GetArray()) {
+		vector.emplace_back(v.GetDouble());
+	}
+	return vector;
+}
+
+std::vector<std::string> freon::Defroster::get_array_string(const std::string& identifier)
+{
+	auto &value = this->document[identifier.c_str()];
 	std::vector<std::string> vector;
 	for (auto & v : value.GetArray()) {
 		vector.emplace_back(v.GetString());

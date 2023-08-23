@@ -42,10 +42,20 @@ namespace freon {
 		Defroster();
 		Defroster(const Defroster &deserialize);
 		void initialize(const std::string& json);
-		bool add_bool(const std::string& identifier);
-		int add_int(const std::string& identifier);
-		std::string add_string(const std::string& identifier);
-		std::vector<std::string> add_arraystring(const std::string& identifier);
+		bool get_boolean(const std::string& identifier);
+		int get_integer(const std::string& identifier);
+		long get_long_integer(const std::string& identifier);
+		unsigned int get_unsigned_integer(const std::string& identifier);
+		unsigned long get_unsigned_long_integer(const std::string& identifier);
+		double get_double(const std::string& identifier);
+		std::string get_string(const std::string& identifier);
+		std::vector<bool> get_array_boolean(const std::string& identifier);
+		std::vector<int> get_array_integer(const std::string& identifier);
+		std::vector<long> get_array_long_integer(const std::string& identifier);
+		std::vector<unsigned int> get_array_unsigned_integer(const std::string& identifier);
+		std::vector<unsigned long> get_array_unsigned_long_integer(const std::string& identifier);
+		std::vector<double> get_array_double(const std::string& identifier);
+		std::vector<std::string> get_array_string(const std::string& identifier);
 	private:
 		rapidjson::Document document;
 	};
