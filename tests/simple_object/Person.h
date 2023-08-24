@@ -3,6 +3,7 @@
 #include <string>
 
 #include <freon.h>
+#include <cubes/primitive.hpp>
 
 class Person : public freon::Freezable {
 public:

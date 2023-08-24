@@ -29,10 +29,11 @@
 
 #include <utility>
 
-freon::Freezer::Freezer() = default;
-
-freon::Freezer::Freezer(const Freezer &serialize)
+freon::Freezer::Freezer()
 {
+	this->members = 0;
+	this->writer.reset(new rapidjson::PrettyWriter<rapidjson::StringBuffer>(this->buffer));
+	this->document.SetObject();
 }
 
 void freon::Freezer::add(const std::string& identifier, Item::Type type, bool value)
@@ -119,8 +120,19 @@ void freon::Freezer::add(const std::string& identifier, Item::Type type, std::ve
 	buffer_area.insert({identifier, field});
 }
 
+void freon::Freezer::begin_freezing()
+{
+	//this->document.StartObject();
+}
+
+void freon::Freezer::end_freezing()
+{
+	//this->document.EndObject(this->members);
+}
+
 void freon::Freezer::generate_json()
 {
+	/*
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(this->buffer);
 
 	writer.StartObject();
@@ -130,6 +142,14 @@ void freon::Freezer::generate_json()
 				writer.String(field.first.c_str());
 				writer.Bool(field.second.get_value().b);
 				break;
+			case Item::Type::Character:
+				writer.String(field.first.c_str());
+				writer.String(reinterpret_cast<const char *>(new std::string(1, field.second.get_value().c)));
+				break;
+			case Item::Type::Short:
+				writer.String(field.first.c_str());
+				writer.Int(field.second.get_value().s);
+				break;
 			case Item::Type::Integer:
 				writer.String(field.first.c_str());
 				writer.Int(field.second.get_value().i);
@@ -138,6 +158,9 @@ void freon::Freezer::generate_json()
 				writer.String(field.first.c_str());
 				writer.Int64(field.second.get_value().l);
 				break;
+			case Item::Type::LongLongInteger:
+				writer.String(field.first.c_str());
+				writer.Int64(field.second.get_value().ll);
 			case Item::Type::UnsignedInteger:
 				writer.String(field.first.c_str());
 				writer.Uint(field.second.get_value().ui);
@@ -145,6 +168,14 @@ void freon::Freezer::generate_json()
 			case Item::Type::UnsignedLongInteger:
 				writer.String(field.first.c_str());
 				writer.Uint64(field.second.get_value().ul);
+				break;
+			case Item::Type::UnsignedLongLongInteger:
+				writer.String(field.first.c_str());
+				writer.Uint64(field.second.get_value().ull);
+				break;
+			case Item::Type::Float:
+				writer.String(field.first.c_str());
+				writer.Double(field.second.get_value().f);
 				break;
 			case Item::Type::Double:
 				writer.String(field.first.c_str());
@@ -162,6 +193,13 @@ void freon::Freezer::generate_json()
 				}
 				writer.EndArray();
 				break;
+			case Item::Type::ArrayCharacter:
+				writer.String(field.first.c_str());
+				writer.StartArray();
+				break;
+			case Item::Type::ArrayShort:
+				writer.String(field.first.c_str());
+
 			case Item::Type::ArrayInteger:
 				writer.String(field.first.c_str());
 				writer.StartArray();
@@ -213,9 +251,11 @@ void freon::Freezer::generate_json()
 		}
 	}
 	writer.EndObject();
+	*/
 }
 
 std::string freon::Freezer::retrieve_json()
 {
+	this->document.Accept(*this->writer);
 	return buffer.GetString();
 }

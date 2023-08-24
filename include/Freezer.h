@@ -31,18 +31,21 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
+#include <memory>
 
 #include <rapidjson/stringbuffer.h>
 #include <rapidjson/prettywriter.h>
 #include <rapidjson/document.h>
 
 #include <Item.h>
+#include <cubes/cube.hpp>
 
 namespace freon {
 	class Freezer {
 	public:
 		Freezer();
-		Freezer(const Freezer &serialize);
+		template <typename T>
+		void add(freon::cubes::cube<T> &cube, const std::string &identifier, const T &value);
 		void add(const std::string& identifier, Item::Type type, bool value);
 		void add(const std::string& identifier, Item::Type type, int value);
 		void add(const std::string& identifier, Item::Type type, long value);
@@ -57,10 +60,23 @@ namespace freon {
 		void add(const std::string& identifier, Item::Type type, std::vector<unsigned long> values);
 		void add(const std::string& identifier, Item::Type type, std::vector<double> values);
 		void add(const std::string& identifier, Item::Type type, std::vector<std::string> values);
+		void begin_freezing();
+		void end_freezing();
 		void generate_json();
 		std::string retrieve_json();
 	private:
+		rapidjson::SizeType members;
+		rapidjson::Document document;
 		rapidjson::StringBuffer buffer;
+		std::unique_ptr<rapidjson::PrettyWriter<rapidjson::StringBuffer>> writer;
+		//rapidjson::PrettyWriter<rapidjson::StringBuffer> writer;
 		std::unordered_map<std::string, Item> buffer_area;
 	};
+}
+
+template <typename T>
+void freon::Freezer::add(freon::cubes::cube<T> &cube, const std::string &identifier, const T &value)
+{
+	cube.set(this->document, identifier, value);
+	this->members++;
 }
