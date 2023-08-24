@@ -15,7 +15,6 @@ namespace freon {
 		template <typename T>
 		class cube {
 		public:
-			virtual void set(rapidjson::PrettyWriter<rapidjson::StringBuffer> &writer, const std::string &identifier, const T &value) = 0;
 			virtual void set(rapidjson::Document &document, const std::string &identifier, const T &value) = 0;
 			virtual T get(rapidjson::Document &document, const std::string &identifier) = 0;
 		};

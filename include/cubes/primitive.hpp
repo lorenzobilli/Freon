@@ -16,11 +16,6 @@ namespace freon {
 		template <>
 		class primitive<std::string> : public cube<std::string> {
 
-			void set(rapidjson::PrettyWriter<rapidjson::StringBuffer> &writer, const std::string &identifier, const std::string &value) override {
-				writer.String(identifier.c_str());
-				writer.String(value.c_str());
-			}
-
 			void set(rapidjson::Document &document, const std::string &identifier, const std::string &value) override {
 				auto& allocator = document.GetAllocator();
 				rapidjson::Value document_identifier(identifier.c_str(), allocator);
