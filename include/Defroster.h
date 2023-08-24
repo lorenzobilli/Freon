@@ -36,12 +36,17 @@
 #include <rapidjson/prettywriter.h>
 #include <rapidjson/document.h>
 
+#include <cubes/cube.hpp>
+
 namespace freon {
 	class Defroster {
 	public:
 		Defroster();
 		Defroster(const Defroster &deserialize);
 		void initialize(const std::string& json);
+		template <typename T>
+		T get(freon::cubes::cube<T> &cube, const std::string &identifier);
+		void from_json(const std::string &json);
 		bool get_boolean(const std::string& identifier);
 		int get_integer(const std::string& identifier);
 		long get_long_integer(const std::string& identifier);
@@ -59,4 +64,10 @@ namespace freon {
 	private:
 		rapidjson::Document document;
 	};
+}
+
+template <typename T>
+T freon::Defroster::get(freon::cubes::cube<T> &cube, const std::string &identifier)
+{
+	return cube.get(this->document, identifier);
 }

@@ -39,6 +39,11 @@ void freon::Defroster::initialize(const std::string& json)
 	this->document.Parse(json.c_str());
 }
 
+void freon::Defroster::from_json(const std::string &json)
+{
+	this->document.Parse(json.c_str());
+}
+
 bool freon::Defroster::get_boolean(const std::string& identifier)
 {
 	auto &value = this->document[identifier.c_str()];
