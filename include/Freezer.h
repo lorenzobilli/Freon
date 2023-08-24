@@ -60,10 +60,9 @@ namespace freon {
 		void add(const std::string& identifier, Item::Type type, std::vector<unsigned long> values);
 		void add(const std::string& identifier, Item::Type type, std::vector<double> values);
 		void add(const std::string& identifier, Item::Type type, std::vector<std::string> values);
-		void begin_freezing();
-		void end_freezing();
 		void generate_json();
 		std::string retrieve_json();
+		std::string to_json();
 	private:
 		rapidjson::SizeType members;
 		rapidjson::Document document;

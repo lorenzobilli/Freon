@@ -27,13 +27,14 @@
 
 #include "Freezable.h"
 
+#include <utility>
+
 void freon::Freezable::freeze(std::string object, std::string id)
 {
-	this->object = object;
-	this->id = id;
+	this->object = std::move(object);
+	this->id = std::move(id);
 
 	freeze_all();
-	freezer.generate_json();
 
 	if (!this->prefix.empty()) {
 		filename = this->prefix + "_" + this->object + "_" + this->id + ".json";
@@ -43,7 +44,7 @@ void freon::Freezable::freeze(std::string object, std::string id)
 
 	std::ofstream writer;
 	writer.open(filename);
-	writer << freezer.retrieve_json();
+	writer << freezer.to_json();
 	writer.close();
 }
 

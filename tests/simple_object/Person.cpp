@@ -22,12 +22,10 @@ std::string Person::get_surname()
 
 void Person::freeze_all()
 {
-	get_freezer().begin_freezing();
 	auto name_cube = freon::cubes::primitive<std::string>();
 	auto surname_cube = freon::cubes::primitive<std::string>();
 	get_freezer().add<std::string>(name_cube, "name", name);
 	get_freezer().add<std::string>(surname_cube, "surname", surname);
-	get_freezer().end_freezing();
 }
 
 void Person::defrost_all()

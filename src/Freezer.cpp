@@ -120,19 +120,8 @@ void freon::Freezer::add(const std::string& identifier, Item::Type type, std::ve
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::begin_freezing()
-{
-	//this->document.StartObject();
-}
-
-void freon::Freezer::end_freezing()
-{
-	//this->document.EndObject(this->members);
-}
-
 void freon::Freezer::generate_json()
 {
-	/*
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(this->buffer);
 
 	writer.StartObject();
@@ -251,10 +240,15 @@ void freon::Freezer::generate_json()
 		}
 	}
 	writer.EndObject();
-	*/
 }
 
 std::string freon::Freezer::retrieve_json()
+{
+	this->document.Accept(*this->writer);
+	return buffer.GetString();
+}
+
+std::string freon::Freezer::to_json()
 {
 	this->document.Accept(*this->writer);
 	return buffer.GetString();
