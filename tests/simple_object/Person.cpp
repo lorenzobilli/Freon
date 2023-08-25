@@ -24,13 +24,13 @@ void Person::freeze_all()
 {
 	auto name_cube = freon::cubes::primitive<std::string>();
 	auto surname_cube = freon::cubes::primitive<std::string>();
-	get_freezer().add(name_cube, "name", name);
-	get_freezer().add(surname_cube, "surname", surname);
+	get_freezer().freeze(name_cube, "name", name);
+	get_freezer().freeze(surname_cube, "surname", surname);
 }
 
 void Person::melt_all() {
 	auto name_cube = freon::cubes::primitive<std::string>();
 	auto surname_cube = freon::cubes::primitive<std::string>();
-	name = get_melter().get(name_cube, "name");
-	surname = get_melter().get(surname_cube, "surname");
+	name = get_melter().melt(name_cube, "name");
+	surname = get_melter().melt(surname_cube, "surname");
 }

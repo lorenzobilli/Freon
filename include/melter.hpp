@@ -45,7 +45,7 @@ namespace freon {
 		melter(const melter &deserialize);
 		void initialize(const std::string& json);
 		template <typename T>
-		T get(freon::cubes::cube<T> &cube, const std::string &identifier);
+		T melt(freon::cubes::cube<T> &cube, const std::string &identifier);
 		void from_json(const std::string &json);
 		bool get_boolean(const std::string& identifier);
 		int get_integer(const std::string& identifier);
@@ -67,7 +67,7 @@ namespace freon {
 }
 
 template <typename T>
-T freon::melter::get(freon::cubes::cube<T> &cube, const std::string &identifier)
+T freon::melter::melt(freon::cubes::cube<T> &cube, const std::string &identifier)
 {
 	return cube.melt(this->document, identifier);
 }

@@ -45,7 +45,7 @@ namespace freon {
 	public:
 		freezer();
 		template <typename T>
-		void add(freon::cubes::cube<T> &cube, const std::string &identifier, const T &value);
+		void freeze(freon::cubes::cube<T> &cube, const std::string &identifier, const T &value);
 		void add(const std::string& identifier, Item::Type type, bool value);
 		void add(const std::string& identifier, Item::Type type, int value);
 		void add(const std::string& identifier, Item::Type type, long value);
@@ -73,7 +73,7 @@ namespace freon {
 }
 
 template <typename T>
-void freon::freezer::add(freon::cubes::cube<T> &cube, const std::string &identifier, const T &value)
+void freon::freezer::freeze(freon::cubes::cube<T> &cube, const std::string &identifier, const T &value)
 {
 	cube.freeze(this->document, identifier, value);
 	this->members++;
