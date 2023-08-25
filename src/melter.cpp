@@ -25,7 +25,7 @@
  *  Implementation of all methods of the melter module.
  */
 
-#include <melter.h>
+#include <melter.hpp>
 
 
 freon::melter::melter() = default;

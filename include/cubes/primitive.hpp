@@ -16,14 +16,14 @@ namespace freon {
 		template <>
 		class primitive<short> : public cube<short> {
 
-			void set(rapidjson::Document &document, const std::string &identifier, const short &value)
+			void freeze(rapidjson::Document &document, const std::string &identifier, const short &value) override
 			{
 				auto &allocator = document.GetAllocator();
 				rapidjson::Value document_identifier(identifier.c_str(), allocator);
 				document.AddMember(document_identifier, value, allocator);
 			}
 
-			short get(rapidjson::Document &document, const std::string &identifier) override
+			short melt(rapidjson::Document &document, const std::string &identifier) override
 			{
 				auto value = &document[identifier.c_str()];
 				return value->GetInt();
@@ -33,14 +33,14 @@ namespace freon {
 		template <>
 		class primitive<int> : public cube<int> {
 
-			void set(rapidjson::Document &document, const std::string &identifier, const int &value) override
+			void freeze(rapidjson::Document &document, const std::string &identifier, const int &value) override
 			{
 				auto &allocator = document.GetAllocator();
 				rapidjson::Value document_identifier(identifier.c_str(), allocator);
 				document.AddMember(document_identifier, value, allocator);
 			}
 
-			int get(rapidjson::Document &document, const std::string &identifier) override
+			int melt(rapidjson::Document &document, const std::string &identifier) override
 			{
 				auto value = &document[identifier.c_str()];
 				return value->GetInt();
@@ -50,7 +50,7 @@ namespace freon {
 		template <>
 		class primitive<std::string> : public cube<std::string> {
 
-			void set(rapidjson::Document &document, const std::string &identifier, const std::string &value) override
+			void freeze(rapidjson::Document &document, const std::string &identifier, const std::string &value) override
 			{
 				auto& allocator = document.GetAllocator();
 				rapidjson::Value document_identifier(identifier.c_str(), allocator);
@@ -58,7 +58,7 @@ namespace freon {
 				document.AddMember(document_identifier, document_value, allocator);
 			}
 
-			std::string get(rapidjson::Document &document, const std::string &identifier) override
+			std::string melt(rapidjson::Document &document, const std::string &identifier) override
 			{
 				auto value = &document[identifier.c_str()];
 				return value->GetString();

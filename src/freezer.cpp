@@ -25,7 +25,7 @@
  *  Implementation of all methods of the freezer module.
  */
 
-#include <freezer.h>
+#include <freezer.hpp>
 
 #include <utility>
 

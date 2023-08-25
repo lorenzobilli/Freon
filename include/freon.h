@@ -27,5 +27,5 @@
 
 #include <liquid.h>
 #include <Item.h>
-#include <freezer.h>
-#include <melter.h>
+#include <freezer.hpp>
+#include <melter.hpp>

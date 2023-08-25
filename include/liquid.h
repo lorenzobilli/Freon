@@ -30,8 +30,8 @@
 #include <fstream>
 #include <string>
 
-#include <freezer.h>
-#include <melter.h>
+#include <freezer.hpp>
+#include <melter.hpp>
 
 namespace freon {
 	class liquid {

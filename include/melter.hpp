@@ -69,5 +69,5 @@ namespace freon {
 template <typename T>
 T freon::melter::get(freon::cubes::cube<T> &cube, const std::string &identifier)
 {
-	return cube.get(this->document, identifier);
+	return cube.melt(this->document, identifier);
 }

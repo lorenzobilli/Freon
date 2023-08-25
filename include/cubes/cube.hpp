@@ -15,8 +15,8 @@ namespace freon {
 		template <typename T>
 		class cube {
 		public:
-			virtual void set(rapidjson::Document &document, const std::string &identifier, const T &value) = 0;
-			virtual T get(rapidjson::Document &document, const std::string &identifier) = 0;
+			virtual void freeze(rapidjson::Document &document, const std::string &identifier, const T &value) = 0;
+			virtual T melt(rapidjson::Document &document, const std::string &identifier) = 0;
 		};
 	}
 }
