@@ -31,7 +31,7 @@
 #include <string>
 
 #include <freezer.h>
-#include <Defroster.h>
+#include <melter.h>
 
 namespace freon {
 	class liquid {
@@ -41,12 +41,12 @@ namespace freon {
 		void defrost(std::string object, std::string id);
 		void defrost(std::string prefix, std::string object, std::string id);
 		freon::freezer &get_freezer() { return freezer; }
-		freon::Defroster &get_defroster() { return defroster; }
+		freon::melter &get_defroster() { return defroster; }
 		std::string get_filename() { return filename; }
 		std::string get_nested_prefix();
 	private:
 		freon::freezer freezer;
-		freon::Defroster defroster;
+		freon::melter defroster;
 		std::string prefix;
 		std::string object;
 		std::string id;
