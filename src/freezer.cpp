@@ -20,107 +20,107 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  src/Freezer.cpp
+ *  src/freezer.cpp
  *
- *  Implementation of all methods of the Freezer module.
+ *  Implementation of all methods of the freezer module.
  */
 
-#include <Freezer.h>
+#include <freezer.h>
 
 #include <utility>
 
-freon::Freezer::Freezer()
+freon::freezer::freezer()
 {
 	this->members = 0;
 	this->writer.reset(new rapidjson::PrettyWriter<rapidjson::StringBuffer>(this->buffer));
 	this->document.SetObject();
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, bool value)
+void freon::freezer::add(const std::string& identifier, Item::Type type, bool value)
 {
 	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, int value)
+void freon::freezer::add(const std::string& identifier, Item::Type type, int value)
 {
 	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, long value)
+void freon::freezer::add(const std::string& identifier, Item::Type type, long value)
 {
 	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, unsigned int value)
+void freon::freezer::add(const std::string& identifier, Item::Type type, unsigned int value)
 {
 	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, unsigned long value)
+void freon::freezer::add(const std::string& identifier, Item::Type type, unsigned long value)
 {
 	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, double value)
+void freon::freezer::add(const std::string& identifier, Item::Type type, double value)
 {
 	Item field = Item(type, value);
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, std::string value)
+void freon::freezer::add(const std::string& identifier, Item::Type type, std::string value)
 {
 	Item field = Item(type, std::move(value));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<bool> values)
+void freon::freezer::add(const std::string& identifier, Item::Type type, std::vector<bool> values)
 {
 	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<int> values)
+void freon::freezer::add(const std::string& identifier, Item::Type type, std::vector<int> values)
 {
 	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<long> values)
+void freon::freezer::add(const std::string& identifier, Item::Type type, std::vector<long> values)
 {
 	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<unsigned int> values)
+void freon::freezer::add(const std::string& identifier, Item::Type type, std::vector<unsigned int> values)
 {
 	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<unsigned long> values)
+void freon::freezer::add(const std::string& identifier, Item::Type type, std::vector<unsigned long> values)
 {
 	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<double> values)
+void freon::freezer::add(const std::string& identifier, Item::Type type, std::vector<double> values)
 {
 	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::add(const std::string& identifier, Item::Type type, std::vector<std::string> values)
+void freon::freezer::add(const std::string& identifier, Item::Type type, std::vector<std::string> values)
 {
 	Item field = Item(type, std::move(values));
 	buffer_area.insert({identifier, field});
 }
 
-void freon::Freezer::generate_json()
+void freon::freezer::generate_json()
 {
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(this->buffer);
 
@@ -242,13 +242,13 @@ void freon::Freezer::generate_json()
 	writer.EndObject();
 }
 
-std::string freon::Freezer::retrieve_json()
+std::string freon::freezer::retrieve_json()
 {
 	this->document.Accept(*this->writer);
 	return buffer.GetString();
 }
 
-std::string freon::Freezer::to_json()
+std::string freon::freezer::to_json()
 {
 	this->document.Accept(*this->writer);
 	return buffer.GetString();

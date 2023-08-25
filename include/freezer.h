@@ -20,9 +20,9 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  include/Freezer.h
+ *  include/freezer.h
  *
- *  Public header of the Freezer module.
+ *  Public header of the freezer module.
  */
 
 #pragma once
@@ -41,9 +41,9 @@
 #include <cubes/cube.hpp>
 
 namespace freon {
-	class Freezer {
+	class freezer {
 	public:
-		Freezer();
+		freezer();
 		template <typename T>
 		void add(freon::cubes::cube<T> &cube, const std::string &identifier, const T &value);
 		void add(const std::string& identifier, Item::Type type, bool value);
@@ -74,7 +74,7 @@ namespace freon {
 }
 
 template <typename T>
-void freon::Freezer::add(freon::cubes::cube<T> &cube, const std::string &identifier, const T &value)
+void freon::freezer::add(freon::cubes::cube<T> &cube, const std::string &identifier, const T &value)
 {
 	cube.set(this->document, identifier, value);
 	this->members++;
