@@ -11,7 +11,7 @@ int main()
 	std::cout << "First array:" << std::endl;
 	first.print();
 	first.freeze("Array", "first");
-	second.defrost("Array", "first");
+	second.melt("Array", "first");
 	std::cout << "\nSecond array: " << std::endl;
 	second.print();
 }

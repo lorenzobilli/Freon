@@ -15,5 +15,5 @@ private:
 	std::string name;
 	std::string surname;
 	void freeze_all() override;
-	void defrost_all() override;
+	void melt_all() override;
 };

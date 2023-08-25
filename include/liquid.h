@@ -38,20 +38,20 @@ namespace freon {
 	public:
 		void freeze(std::string object, std::string id);
 		void freeze(std::string prefix, std::string object, std::string id);
-		void defrost(std::string object, std::string id);
-		void defrost(std::string prefix, std::string object, std::string id);
+		void melt(std::string object, std::string id);
+		void melt(std::string prefix, std::string object, std::string id);
 		freon::freezer &get_freezer() { return freezer; }
-		freon::melter &get_defroster() { return defroster; }
+		freon::melter &get_melter() { return melter; }
 		std::string get_filename() { return filename; }
 		std::string get_nested_prefix();
 	private:
 		freon::freezer freezer;
-		freon::melter defroster;
+		freon::melter melter;
 		std::string prefix;
 		std::string object;
 		std::string id;
 		std::string filename;
 		virtual void freeze_all() = 0;
-		virtual void defrost_all() = 0;
+		virtual void melt_all() = 0;
 	};
 }

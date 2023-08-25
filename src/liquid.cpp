@@ -54,7 +54,7 @@ void freon::liquid::freeze(std::string prefix, std::string object, std::string i
 	freeze(std::move(object), std::move(id));
 }
 
-void freon::liquid::defrost(std::string object, std::string id)
+void freon::liquid::melt(std::string object, std::string id)
 {
 	this->object = object;
 	this->id = id;
@@ -75,14 +75,14 @@ void freon::liquid::defrost(std::string object, std::string id)
 		reader.close();
 	}
 
-	defroster.initialize(json);
-	defrost_all();
+	melter.from_json(json);
+	melt_all();
 }
 
-void freon::liquid::defrost(std::string prefix, std::string object, std::string id)
+void freon::liquid::melt(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
-	defrost(std::move(object), std::move(id));
+	melt(std::move(object), std::move(id));
 }
 
 std::string freon::liquid::get_nested_prefix()

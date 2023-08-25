@@ -14,5 +14,5 @@ public:
 private:
 	std::vector<std::string> array;
 	void freeze_all() override;
-	void defrost_all() override;
+	void melt_all() override;
 };

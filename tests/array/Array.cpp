@@ -21,7 +21,6 @@ void Array::freeze_all()
 	get_freezer().add("array", freon::Item::Type::ArrayString, array);
 }
 
-void Array::defrost_all()
-{
-	array = get_defroster().get_array_string("array");
+void Array::melt_all() {
+	array = get_melter().get_array_string("array");
 }

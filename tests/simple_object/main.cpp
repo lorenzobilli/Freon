@@ -9,7 +9,7 @@ int main()
 	p1.freeze("Person", "p1");
 
 	Person p2;
-	p2.defrost("Person", "p1");
+	p2.melt("Person", "p1");
 	std::cout << "Reloaded person \"p2\": " << p2.get_name() << " " << p2.get_surname() << std::endl;
 
 	return 0;
