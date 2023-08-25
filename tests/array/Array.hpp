@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 
-#include <Freezable.h>
+#include <liquid.h>
 
-class Array : public freon::Freezable {
+class Array : public freon::liquid {
 public:
 	Array();
 	void populate(const std::vector<std::string>&);

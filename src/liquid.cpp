@@ -20,16 +20,16 @@
  *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *
- *  src/Freezable.cpp
+ *  src/liquid.cpp
  *
- *  Implementation of all methods of the Freezable module.
+ *  Implementation of all methods of the liquid module.
  */
 
-#include "Freezable.h"
+#include "liquid.h"
 
 #include <utility>
 
-void freon::Freezable::freeze(std::string object, std::string id)
+void freon::liquid::freeze(std::string object, std::string id)
 {
 	this->object = std::move(object);
 	this->id = std::move(id);
@@ -48,13 +48,13 @@ void freon::Freezable::freeze(std::string object, std::string id)
 	writer.close();
 }
 
-void freon::Freezable::freeze(std::string prefix, std::string object, std::string id)
+void freon::liquid::freeze(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
 	freeze(std::move(object), std::move(id));
 }
 
-void freon::Freezable::defrost(std::string object, std::string id)
+void freon::liquid::defrost(std::string object, std::string id)
 {
 	this->object = object;
 	this->id = id;
@@ -79,13 +79,13 @@ void freon::Freezable::defrost(std::string object, std::string id)
 	defrost_all();
 }
 
-void freon::Freezable::defrost(std::string prefix, std::string object, std::string id)
+void freon::liquid::defrost(std::string prefix, std::string object, std::string id)
 {
 	this->prefix = prefix;
 	defrost(std::move(object), std::move(id));
 }
 
-std::string freon::Freezable::get_nested_prefix()
+std::string freon::liquid::get_nested_prefix()
 {
 	std::string nested_prefix;
 

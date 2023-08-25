@@ -22,7 +22,7 @@
  *
  *  src/freon.cpp
  *
- *  Public header of the Freezable module.
+ *  Public header of the liquid module.
  */
 
 #pragma once
@@ -34,7 +34,7 @@
 #include <Defroster.h>
 
 namespace freon {
-	class Freezable {
+	class liquid {
 	public:
 		void freeze(std::string object, std::string id);
 		void freeze(std::string prefix, std::string object, std::string id);

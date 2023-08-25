@@ -25,7 +25,7 @@
  *  Public header of the Freon library.
  */
 
-#include <Freezable.h>
+#include <liquid.h>
 #include <Item.h>
 #include <Freezer.h>
 #include <Defroster.h>

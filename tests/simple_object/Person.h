@@ -5,7 +5,7 @@
 #include <freon.h>
 #include <cubes/primitive.hpp>
 
-class Person : public freon::Freezable {
+class Person : public freon::liquid {
 public:
 	Person();
 	Person(std::string name, std::string surname);
