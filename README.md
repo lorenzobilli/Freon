@@ -1,3 +1,3 @@
 # Freon #
 
-## DBMS-less persistency framework for C++ applications ##
+## A C++ object serialization framework ##
